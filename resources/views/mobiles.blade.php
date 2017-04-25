@@ -40,7 +40,7 @@
 					                                <td>{{$mob->id}}</td>
 					                                <td>{{$mob->name}}</td>
 					                                <td>{{$mob->price}}</td>
-					                                <td>{{$mob->image}}</td>
+					                                <td><a href="{{$mob->image}}">{{$mob->image}}</a></td>
 					                                
 					                            </tr>
 					                        @endforeach

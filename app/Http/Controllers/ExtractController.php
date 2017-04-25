@@ -48,7 +48,7 @@ if($pages!=0){
 							$image   = $node->filter('img')->attr('src');
 							//$image=	$crawler->selectImage('img')->image();
 							$mob=Mobile::insert(['name' => $name, 'price' => floatval(str_replace(',', '', substr($price,0,-3))),'image'=>$image]);
-							print_r($name.' ===> '.str_replace(',', '', substr($price,0,-3)).'====>'.$image."<br>");
+							//print_r($name.' ===> '.str_replace(',', '', substr($price,0,-3)).'====>'.$image."<br>");
 					     });
 				    }
 				}else{
@@ -59,7 +59,7 @@ if($pages!=0){
 							$price = trim($node->filter('.is ')->text());
 							$image   = $node->filter('img')->attr('src');
 						$mob=Mobile::insert(['name' => $name, 'price' => floatval(str_replace(',', '', substr($price,0,-3))),'image'=>$image]);
-								print_r($name.' ===> '.str_replace(',', '', substr($price,0,-3)).'====>'.$image."<br>");
+								//print_r($name.' ===> '.str_replace(',', '', substr($price,0,-3)).'====>'.$image."<br>");
 					     });
 
 				}
