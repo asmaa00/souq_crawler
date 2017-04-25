@@ -36,6 +36,7 @@ $crawler = $client->request('GET', "$request->u");
 				        ? $crawler->filter(' .pagination li:nth-last-child(2)')->text()
 				        : 0;
 
+if($pages!=0){
 
 				    for ($i = 1; $i < $pages+1 ; $i++) {
 			       
@@ -44,11 +45,33 @@ $crawler = $client->request('GET', "$request->u");
 				        $crawler->filter(' .single-item')->each(function ($node) {
 							$name   = trim( $node->filter(' .title')->text());
 							$price = trim($node->filter('.is ')->text());
-							$mob=Mobile::insert(['name' => $name, 'price' => floatval(str_replace(',', '', substr($price,0,-3)))]);
-								print_r($name.' ===> '.str_replace(',', '', substr($price,0,-3))."<br>");
+							$image   = $node->filter('img')->attr('src');
+							//$image=	$crawler->selectImage('img')->image();
+							$mob=Mobile::insert(['name' => $name, 'price' => floatval(str_replace(',', '', substr($price,0,-3))),'image'=>$image]);
+							print_r($name.' ===> '.str_replace(',', '', substr($price,0,-3)).'====>'.$image."<br>");
 					     });
 				    }
+				}else{
+					
+					$crawler = $client->request('GET', "$request->u");
+					 $crawler->filter(' .single-item')->each(function ($node) {
+							$name   = trim( $node->filter(' .title')->text());
+							$price = trim($node->filter('.is ')->text());
+							$image   = $node->filter('img')->attr('src');
+						$mob=Mobile::insert(['name' => $name, 'price' => floatval(str_replace(',', '', substr($price,0,-3))),'image'=>$image]);
+								print_r($name.' ===> '.str_replace(',', '', substr($price,0,-3)).'====>'.$image."<br>");
+					     });
 
+				}
+
+				return redirect()->route('mobiles.show');
+	}
+
+	public function show(){
+
+	$mobs = Mobile::orderBy('id', 'desc')->paginate(10);
+
+		return view('mobiles', compact('mobs'));
 	}
 
 }

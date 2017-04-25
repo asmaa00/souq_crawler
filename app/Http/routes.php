@@ -11,8 +11,9 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/',  ['as' => 'mobiles.welcome', function () {
     return view('welcome');
-});
-Route::get('/extractor', 'ExtractController@index' ); 
+}]);
+Route::get('/extractor', ['as' => 'mobiles.index', 'uses' => 'ExtractController@index'] ); 
+Route::get('/data', ['as' => 'mobiles.show', 'uses' => 'ExtractController@show'] ); 
 
